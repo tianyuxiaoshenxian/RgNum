@@ -1,0 +1,14 @@
+
+view{	margin: 0;
+	padding: 0 ;
+}
+page{
+		background: #FFFFFF !important;
+	
+		height: 100%;
+}
+button.primary {
+		background-color: #0faeff;
+}
+	
+

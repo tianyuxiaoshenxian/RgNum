@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "排队列表",
+  "usingComponents": {
+    "w-button": "/components/watch-login/watch-button"
+  }
+}
