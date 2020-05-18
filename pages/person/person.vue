@@ -3,23 +3,23 @@
     <view class="person-head">
       <cmd-avatar :src="avatarUrl? avatarUrl :'https://avatar.bbs.miui.com/images/noavatar_small.gif'" @click="fnInfoWin" size="lg" :make="{'background-color': '#fff'}"></cmd-avatar>
       <view class="person-head-box">
-        <view class="person-head-nickname">{{loginName ? loginName : '用户'}}</view>
-        <view class="person-head-username">{{loginId ? loginId :'ID:95001'}}</view>
+        <view class="person-head-nickname">{{userInfo.userName ? '用户: '+userInfo.userName : '用户'}}</view>
+        <view class="person-head-username">{{userInfo.phone ? '手机号: ' +userInfo.phone :'手机号'}}</view>
       </view>
     </view>
     <view class="person-list">
-      <cmd-cell-item title="我的设备" slot-left arrow>
+      <cmd-cell-item title="我的预约" slot-left arrow>
         <cmd-icon type="bullet-list" size="24" color="#368dff"></cmd-icon>
       </cmd-cell-item>
       <cmd-cell-item title="消息通知" slot-left arrow>
         <cmd-icon type="message" size="24" color="#368dff"></cmd-icon>
       </cmd-cell-item>
-      <cmd-cell-item title="系统设置" slot-left arrow>
+      <cmd-cell-item title="个人信息设置" slot-left arrow>
         <cmd-icon type="settings" size="24" color="#368dff"></cmd-icon>
       </cmd-cell-item>
-      <cmd-cell-item title="检查版本" addon="v1.0" slot-left arrow>
+     <!-- <cmd-cell-item title="检查版本" addon="v1.0" slot-left arrow>
         <cmd-icon type="alert-circle" size="24" color="#368dff"></cmd-icon>
-      </cmd-cell-item>
+      </cmd-cell-item> -->
     </view>
   </view>
 </template>
@@ -38,10 +38,21 @@
     data() {
       return {
 		  avatarUrl:'',
-		  loginName:'',
-		  loginId:'',
+		  userInfo:{
+			  createTime: '',
+			  phone: '',
+			  role: '',
+			  userId:'',
+			  userName: '',
+			  wechatId: '',
+		  }
 	  };
     },
+	created() {
+		if( this.VglobalData.isLogin ){
+			this.userInfo = {...this.VglobalData.userInfo}
+		}
+	},
     methods: {
       /**
        * 打开用户信息页

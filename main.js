@@ -1,8 +1,13 @@
 import Vue from 'vue'
 import App from './App'
+import BASE_URL from './static/js/BASE_URL.js'
+import VglobalData from './static/js/VglobalData.js'
 
 Vue.config.productionTip = false
-Vue.prototype.VglobalData = {}
+Vue.prototype.VglobalData = VglobalData
+
+
+Vue.prototype.BASE_URL = BASE_URL
 
 Vue.prototype.$showLoading =  function (){
 	return uni.showLoading({

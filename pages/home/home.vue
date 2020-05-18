@@ -5,15 +5,32 @@
 		</view>
 		<view v-if="hasLogin" class="hello">
 			<view class="title ul">
-				您好 {{}}
+				您好 : {{ userName ? userName : ''}}
 			</view>
 			<view class="ul">
-				现在是 : {{CURRENTTIME}}
+				<view>今日已预约 : {{RegNum}} 人</view>
 			</view>
-			<view class="ul">
-				<view>今日已预约 : {{10}} 人</view>
+			
+			<input v-model="currentTime" class="ul">
+			
+			<!-- <view class="ul">
+				现在是 : {{currentTime}}
 			</view>
-			<view class="ul">当前为 : {{2}}&nbsp;号就诊</view>
+			 -->
+			
+			<view class="ul" v-if="!hasRGstatus">
+				<wButton
+					text="立即预约"
+					:rotate="isRotate" 
+					@click.native="startLogin()"
+					class="wbutton"
+				></wButton>
+				
+			</view>
+			
+			<view class="ul" v-else>
+				您的号码为{{newMyRegNum}}
+			</view>
 		</view>
 		<view v-if="!hasLogin" class="hello">
 
@@ -41,34 +58,43 @@
 	export default {
 		data() {
 			return {
-				CURRENTTIME: '',
+				userName:'',
+				currentTime:'',
 				socketTask: null,
 				// 确保websocket是打开状态
 				is_open_socket: false,
 				isRotate:false,
-				RegNum:''//挂号人数
+				RegNum:0,//挂号人数
+				hasLogin:false,//是否为登陆状态
+				hasRGstatus:false,//是否为预约成功状态
+				newMyRegNum:''//当前用户排号号码
 			}
 		},
 		components:{
 			wButton
 		},
+		updated() {
+			this.socketTask.onMessage((res) => {
+				console.log("收到服务器内容：" + res.data);
+				this.RegNum = res.data
+			});
+		},
 		methods: {
 			// getTime: function() {
-			// 	var _this = this;
 			// 	let yy = new Date().getFullYear();
 			// 	let mm = new Date().getMonth() + 1;
 			// 	let dd = new Date().getDate();
 			// 	let hh = new Date().getHours();
 			// 	let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
 			// 	let ss = new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds();
-			// 	_this.CURRENTTIME = yy + '年' + mm + '月' + dd + '日 ' + hh + ':' + mf + ':' + ss;
+			// 	return yy + '年' + mm + '月' + dd + '日 ' + hh + ':' + mf + ':' + ss;
 			// },
 			// 进入这个页面的时候创建websocket连接【整个页面随时使用】
 			connectSocketInit() {
 				// 创建一个this.socketTask对象【发送、接收、关闭socket都由这个对象操作】
 				this.socketTask = uni.connectSocket({
 					// 【非常重要】必须确保你的服务器是成功的,如果是手机测试千万别使用ws://127.0.0.1:9099【特别容易犯的错误】
-					url: "ws://localhost:8080/websocket/manager",
+					url: "ws://"+this.BASE_URL+"/websocket/manager",
 					success(data) {
 						console.log("websocket连接成功");
 					},
@@ -87,7 +113,6 @@
 					});
 					// 注：只有连接正常打开中 ，才能正常收到消息
 					this.socketTask.onMessage((res) => {
-						this.RegNum = res.data
 						console.log("收到服务器内容：" + res.data);
 					});
 				})
@@ -120,37 +145,68 @@
 				}
 			},
 			startLogin() {
-				this.socketTask.send({
-					data: "6",
-					async success() {
-						console.log("消息发送成功");
-					},
-				});
-				// this.closeSocket();
-				// uni.navigateTo({
-				// 	url: "/pages/login/register"
-				// })
+				// this.socketTask.send({
+				// 	data: "6",
+				// 	async success() {
+				// 		console.log("消息发送成功");
+				// 	},
+				// });\
+				var that =this 
+				if(!this.VglobalData.isLogin){
+					uni.reLaunch({
+						url: "/pages/login/login"
+					})
+				} 
+				else {
+					uni.request({
+						url:'http://' + this.BASE_URL + '/registerNumber/setRegisterNum',
+						data: 
+							that.VglobalData.userInfo
+						,
+						method: 'post',
+						success(res) {
+							let $data = res.data
+							if( $data.message == 'ok'){
+								debugger
+								that.newMyRegNum = $data.data.newMyRegNum
+								that.socketTask.send({
+									data: $data.resultMsg,
+									async success() {
+										console.log("消息发送成功");
+									},
+								});
+							} else {
+								that.$message($data.resultMsg)
+							}
+						}
+					})
+					
+				}
+				
 			}
 		},
 		created() {
-			setInterval(this.getTime, 1000)
+			// this.currentTime = this.getTime()
+			
+			
 		},
 		beforeDestroy() {
 			this.closeSocket();
 		},
 		onLoad() {
+			this.hasLogin = this.VglobalData.isLogin
+			this.userName = this.VglobalData.userInfo.userName
 			var that = this
-			wx.request({
-				url: "http://localhost:8080/registerNumber/getRegisterNum",
+			uni.request({
+				url: "http://"+this.BASE_URL+"/registerNumber/getRegisterNum",
 				data: {},
 				method: 'post',
 				success(res) {
-					let $data = res.data
-					if( $data.message == 'ok'){
-					that.RegNum = $data.data.RegNum 
+					if( res.data.message == 'ok'){
+				 	that.RegNum = res.data.data.RegNum
 						
 					} else {
-						that.$message($data.message)
+						that.$message(res.data.resultMsg)
 					}
 				}
 			})
