@@ -27,10 +27,10 @@
 				></wButton>
 				
 			</view>
-			
 			<view class="ul" v-else>
-				您的号码为{{newMyRegNum}}
+				<view>您的号码是 : {{newMyRegNum}} 号</view>
 			</view>
+			
 		</view>
 		<view v-if="!hasLogin" class="hello">
 
@@ -92,13 +92,7 @@
 			// 进入这个页面的时候创建websocket连接【整个页面随时使用】
 			connectSocketInit() {
 				// 创建一个this.socketTask对象【发送、接收、关闭socket都由这个对象操作】
-				this.socketTask = uni.connectSocket({
-					// 【非常重要】必须确保你的服务器是成功的,如果是手机测试千万别使用ws://127.0.0.1:9099【特别容易犯的错误】
-					url: "ws://"+this.BASE_URL+"/websocket/manager",
-					success(data) {
-						console.log("websocket连接成功");
-					},
-				});
+				this.socketTask = this.$socketTask()
 
 				// 消息的发送和接收必须在正常连接打开中,才能发送或接收【否则会失败】
 				this.socketTask.onOpen((res) => {
@@ -117,9 +111,9 @@
 					});
 				})
 				// 这里仅是事件监听【如果socket关闭了会执行】
-				this.socketTask.onClose(() => {
-					console.log("已经被关闭了")
-				})
+				// this.socketTask.onClose(() => {
+				// 	console.log("已经被关闭了")
+				// })
 			},
 			// 关闭websocket【离开这个页面的时候执行关闭】
 			closeSocket() {
@@ -168,9 +162,16 @@
 							let $data = res.data
 							if( $data.message == 'ok'){
 								debugger
-								that.newMyRegNum = $data.data.newMyRegNum
+								if($data.data.result.id!=""){
+									that.newMyRegNum = $data.data.result.rgNumber
+									that.hasRGstatus = true
+								} else {
+									that.hasRGstatus = false
+								}
+								
+								
 								that.socketTask.send({
-									data: $data.resultMsg,
+									data: $data.data.result.rgNumber,
 									async success() {
 										console.log("消息发送成功");
 									},
@@ -189,9 +190,10 @@
 			// this.currentTime = this.getTime()
 			
 			
+			this.socketTask = this.$socketTask()
 		},
 		beforeDestroy() {
-			this.closeSocket();
+			// this.closeSocket();
 		},
 		onLoad() {
 			this.hasLogin = this.VglobalData.isLogin
@@ -211,7 +213,6 @@
 				}
 			})
 
-			this.connectSocketInit();
 		}
 	}
 </script>

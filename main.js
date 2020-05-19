@@ -5,7 +5,15 @@ import VglobalData from './static/js/VglobalData.js'
 
 Vue.config.productionTip = false
 Vue.prototype.VglobalData = VglobalData
-
+Vue.prototype.$socketTask =function (){
+	return uni.connectSocket({
+					// 【非常重要】必须确保你的服务器是成功的,如果是手机测试千万别使用ws://127.0.0.1:9099【特别容易犯的错误】
+					url: "ws://"+this.BASE_URL+"/websocket/manager",
+					success(data) {
+						console.log("websocket连接成功");
+					},
+				});
+} 
 
 Vue.prototype.BASE_URL = BASE_URL
 

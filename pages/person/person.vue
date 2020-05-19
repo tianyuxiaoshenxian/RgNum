@@ -11,7 +11,7 @@
       <cmd-cell-item title="我的预约" slot-left arrow>
         <cmd-icon type="bullet-list" size="24" color="#368dff"></cmd-icon>
       </cmd-cell-item>
-      <cmd-cell-item title="消息通知" slot-left arrow>
+      <cmd-cell-item title="消息通知" slot-left arrow @click="aaaa">
         <cmd-icon type="message" size="24" color="#368dff"></cmd-icon>
       </cmd-cell-item>
       <cmd-cell-item title="个人信息设置" slot-left arrow>
@@ -45,13 +45,15 @@
 			  userId:'',
 			  userName: '',
 			  wechatId: '',
-		  }
+		  },
+		  socketTask:null
 	  };
     },
 	created() {
 		if( this.VglobalData.isLogin ){
 			this.userInfo = {...this.VglobalData.userInfo}
 		}
+		this.socketTask = this.$socketTask()
 	},
     methods: {
       /**
@@ -61,7 +63,39 @@
         uni.navigateTo({
           url: '/pages/user/info/info'
         })
-      }
+      },
+	  aaaa(){
+		  var that = this
+		  uni.request({
+		  	url:'http://' + this.BASE_URL + '/registerNumber/setRegisterNum',
+		  	data: 
+		  		that.VglobalData.userInfo
+		  	,
+		  	method: 'post',
+		  	success(res) {
+		  		let $data = res.data
+		  		if( $data.message == 'ok'){
+		  			debugger
+		  			if($data.data.result.id!=""){
+		  				that.newMyRegNum = $data.data.result.rgNumber
+		  				that.hasRGstatus = true
+		  			} else {
+		  				that.hasRGstatus = false
+		  			}
+		  			
+		  			
+		  			that.socketTask.send({
+		  				data: $data.data.result.rgNumber,
+		  				async success() {
+		  					console.log("消息发送成功");
+		  				},
+		  			});
+		  		} else {
+		  			that.$message($data.resultMsg)
+		  		}
+		  	}
+		  })
+	  }
     }
   }
 </script>

@@ -7619,9 +7619,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!*******************************!*\
-  !*** D:/小程序/RgNum/pages.json ***!
-  \*******************************/
+/*!***********************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/pages.json ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8525,9 +8525,9 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 
 /***/ }),
 /* 7 */
-/*!************************************************!*\
-  !*** D:/小程序/RgNum/pages.json?{"type":"style"} ***!
-  \************************************************/
+/*!****************************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/pages.json?{"type":"style"} ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8536,9 +8536,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 8 */
-/*!***********************************************!*\
-  !*** D:/小程序/RgNum/pages.json?{"type":"stat"} ***!
-  \***********************************************/
+/*!***************************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/pages.json?{"type":"stat"} ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8680,24 +8680,24 @@ function normalizeComponent (
 
 /***/ }),
 /* 15 */
-/*!******************************************!*\
-  !*** D:/小程序/RgNum/static/js/BASE_URL.js ***!
-  \******************************************/
+/*!**********************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/static/js/BASE_URL.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var BASE_URL = "localhost:8088";
-var BASE_URL2 = "localhost:8080";var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // let BASE_URL = "localhost:8088";
+var BASE_URL = "localhost:8080";var _default =
 
 
 BASE_URL;exports.default = _default;
 
 /***/ }),
 /* 16 */
-/*!*********************************************!*\
-  !*** D:/小程序/RgNum/static/js/VglobalData.js ***!
-  \*********************************************/
+/*!*************************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/static/js/VglobalData.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
