@@ -187,7 +187,8 @@
 				showPicker:false,
 				resultStr:"",
 				itemHeight:`height: ${uni.upx2px(88)}px;`,
-				confirmFlag:true
+				confirmFlag:true,
+				initToMonths:["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
 			};
 		},
 		computed:{
@@ -438,7 +439,9 @@
 			pickerCancel(){
 				this.$emit("cancel",{
 					checkArr:this.checkArr,
-					defaultVal:this.pickVal
+					defaultVal:this.pickVal,
+					cancel:true
+					
 				});
 				this.showPicker = false;
 			},
@@ -465,8 +468,8 @@
 						}else{
 							this.$emit("confirm",{
 								checkArr:this.checkArr,
-								from:checkArr[0]+"-"+checkArr[1]+"-"+checkArr[2],
-								to:checkArr[3]+"-"+checkArr[4]+"-"+checkArr[5],
+								from:checkArr[0]+"-"+checkArr[1],
+								to:checkArr[2]+"-"+checkArr[3],
 								defaultVal:this.pickVal,
 								result:this.resultStr
 							});
@@ -562,11 +565,13 @@
 						_this.resultStr=`${d.value+' '+h.value+':'+m.value+":"+"00"}`;
 						break;
 					case "range":
+						_this.data.tmonths = [...this.initToMonths]
 						let fyear=_this.data.fyears[arr[0]]||_this.data.fyears[_this.data.fyears.length-1];
 						let fmonth=_this.data.fmonths[arr[1]]||_this.data.fmonths[_this.data.fmonths.length-1];
 						//let fday=_this.data.fdays[arr[2]]||_this.data.fdays[_this.data.fdays.length-1];
 						let tyear=_this.data.tyears[arr[3]]||_this.data.tyears[_this.data.tyears.length-1];
-						let tmonth=_this.data.tmonths[arr[4]]||_this.data.tmonths[_this.data.tmonths.length-1];
+						_this.data.tmonths.splice(0,arr[1])
+						let tmonth= _this.data.tmonths[arr[4]]||  _this.data.tmonths[_this.data.tmonths.length-1];
 						//let tday=_this.data.tdays[arr[6]]||_this.data.tdays[_this.data.tdays.length-1];
 						// if(fyear!=checkArr[0]){
 						// 	days=initPicker.range.initDays(fyear,fmonth);
@@ -862,8 +867,8 @@
 						let fYear=data.fyears[dVal[0]]||data.fyears[data.fyears.length-1];
 						let fmonth=data.fmonths[dVal[1]]||data.fmonths[data.fmonths.length-1];
 						// let fday=data.fdays[dVal[2]]||data.fdays[data.fdays.length-1];
-						let tYear=data.tyears[dVal[4]]||data.tyears[data.tyears.length-1];
-						let tmonth=data.tmonths[dVal[5]]||data.tmonths[data.tmonths.length-1];
+						let tYear=data.tyears[dVal[2]]||data.tyears[data.tyears.length-1];
+						let tmonth=data.tmonths[dVal[3]]||data.tmonths[data.tmonths.length-1];
 						// let tday=data.tdays[dVal[6]]||data.tdays[data.tdays.length-1];
 						_this.checkArr=[fYear,fmonth,tYear,tmonth];
 						_this.resultStr=`${fYear + fmonth + '至'+ tYear + tmonth}`;

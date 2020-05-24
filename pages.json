@@ -16,6 +16,9 @@
             "path": "pages/login/forget",
             "style": {}
         }, {
+            "path": "pages/w-picker-demo/w-picker-demo",
+            "style": {}
+        },{
             "path": "pages/login/register",
             "style": {}
         }

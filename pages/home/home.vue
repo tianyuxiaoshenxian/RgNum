@@ -3,7 +3,7 @@
 		<view class="img-org">
 			<image style="margin:auto auto 0;" src="../../static/img/bck.png" mode=""></image>
 		</view>
-		<view v-if="hasLogin" class="hello">
+		<view v-if="!hasLogin" class="hello">
 			<view class="title ul">
 				您好 : {{ userName ? userName : ''}}
 			</view>
@@ -11,13 +11,28 @@
 				<view>今日已预约 : {{RegNum}} 人</view>
 			</view>
 			
-			<input v-model="currentTime" class="ul">
+			<input v-model="currentTime" @click="clickWpicker" disabled placeholder="请选择预约时间" class="ul">
 			
 			<!-- <view class="ul">
 				现在是 : {{currentTime}}
 			</view>
 			 -->
-			
+			<!-- <popupData
+			@close-popup="close"
+			:openPopup="openPopup"
+			 ></popupData> -->
+			 <w-picker
+			         mode="linkage"
+			         :value="defaultRegion1"
+			         :options="options"
+			         :level="4"
+			         default-type="id"
+			         :default-props="defaultProps1"
+			         @confirm="onConfirm($event,'linkage')"
+			         @cancel="onCancel"
+			         ref="linkage" 
+			     ></w-picker>
+			 
 			<view class="ul" v-if="!hasRGstatus">
 				<wButton
 					text="立即预约"
@@ -26,13 +41,14 @@
 					class="wbutton"
 				></wButton>
 				
+				
 			</view>
 			<view class="ul" v-else>
 				<view>您的号码是 : {{newMyRegNum}} 号</view>
 			</view>
 			
 		</view>
-		<view v-if="!hasLogin" class="hello">
+		<view v-if="hasLogin" class="hello">
 
 			<view class="ul">
 				<view>今日已预约 : {{RegNum}} 人</view>
@@ -55,6 +71,9 @@
 
 <script>
 	import wButton from '../../components/watch-login/watch-button.vue'
+	import popupData from "./popupData/popupData.vue";
+	import timeSelector from '../../components/xiujun-time-selector/index.vue';
+	import wPicker from '../../components/w-picker/w-picker.vue';
 	export default {
 		data() {
 			return {
@@ -67,11 +86,53 @@
 				RegNum:0,//挂号人数
 				hasLogin:false,//是否为登陆状态
 				hasRGstatus:false,//是否为预约成功状态
-				newMyRegNum:''//当前用户排号号码
+				newMyRegNum:'',//当前用户排号号码
+				startYear:'',
+				userInfo:{},
+				openPopup:false,
+				thisIsChecked:[],
+				regNumDataRange:[
+					{
+						label:'01',
+						value:'8:30-9:30',
+						checked:false
+					},
+					{
+						label:'02',
+						value:'9:30-10:30',
+						checked:false
+					},
+					{
+						label:'03',
+						value:'10:30-11:30',
+						checked:false
+					},
+					{
+						label:'04',
+						value:'14:30-15:30',
+						checked:false
+					},
+					{
+						label:'05',
+						value:'15:30-16:30',
+						checked:false
+					},
+					{
+						label:'06',
+						value:'16:30-17:30',
+						checked:false
+					}
+					
+				],
+				weeks:["周日","周一","周二","周三","周四","周五","周六"],
+				
 			}
 		},
 		components:{
-			wButton
+			wButton,
+			timeSelector,
+			wPicker,
+			popupData
 		},
 		updated() {
 			this.socketTask.onMessage((res) => {
@@ -80,6 +141,24 @@
 			});
 		},
 		methods: {
+			clickWpicker(){
+				//打开时间选择框
+				// this.$refs.dataRange.open()
+				this.$refs.linkage.show()
+				this.openPopup = true
+			},
+			close(e){
+				this.openPopup = e
+			},
+			
+			onConfirm(e){
+				//时间选择框确认按钮之后
+				this.currentTime = e.result
+			},
+			checkedInput(index){
+				//选中了当前时间段
+				this.$set(this.regNumDataRange,this.regNumDataRange[index].checked,true)
+			},
 			// getTime: function() {
 			// 	let yy = new Date().getFullYear();
 			// 	let mm = new Date().getMonth() + 1;
@@ -152,35 +231,41 @@
 					})
 				} 
 				else {
-					uni.request({
-						url:'http://' + this.BASE_URL + '/registerNumber/setRegisterNum',
-						data: 
-							that.VglobalData.userInfo
-						,
-						method: 'post',
-						success(res) {
-							let $data = res.data
-							if( $data.message == 'ok'){
-								debugger
-								if($data.data.result.id!=""){
-									that.newMyRegNum = $data.data.result.rgNumber
-									that.hasRGstatus = true
+					if( !this.currentTime ){
+						this.$message('请选择预约时间')
+						return
+					} else {
+						uni.request({
+							url:'http://' + this.BASE_URL + '/registerNumber/setRegisterNum',
+							data: 
+								that.userInfo
+							,
+							method: 'post',
+							success(res) {
+								let $data = res.data
+								if( $data.message == 'ok'){
+									debugger
+									if($data.data.result.id!=""){
+										that.newMyRegNum = $data.data.result.rgNumber
+										that.hasRGstatus = true
+									} else {
+										that.hasRGstatus = false
+									}
+									
+									
+									that.socketTask.send({
+										data: $data.data.result.rgNumber,
+										async success() {
+											console.log("消息发送成功");
+										},
+									});
 								} else {
-									that.hasRGstatus = false
+									that.$message($data.resultMsg)
 								}
-								
-								
-								that.socketTask.send({
-									data: $data.data.result.rgNumber,
-									async success() {
-										console.log("消息发送成功");
-									},
-								});
-							} else {
-								that.$message($data.resultMsg)
 							}
-						}
-					})
+						})
+					}
+					
 					
 				}
 				
@@ -196,8 +281,10 @@
 			// this.closeSocket();
 		},
 		onLoad() {
+			// weekday:weeks[new data().getDay()]
 			this.hasLogin = this.VglobalData.isLogin
 			this.userName = this.VglobalData.userInfo.userName
+			this.userInfo = {...this.VglobalData.userInfo}
 			var that = this
 			uni.request({
 				url: "http://"+this.BASE_URL+"/registerNumber/getRegisterNum",
@@ -206,7 +293,7 @@
 				success(res) {
 					if( res.data.message == 'ok'){
 				 	that.RegNum = res.data.data.RegNum
-						
+					that.startYear = res.data.data.currentTime.substring(0,4)
 					} else {
 						that.$message(res.data.resultMsg)
 					}
@@ -259,4 +346,5 @@
 	.ul>view {
 		line-height: 25px;
 	}
+	
 </style>

@@ -1,0 +1,11 @@
+
+.w-picker-demo{
+	padding:30rpx 0;
+	text-align: center;
+	font-size: 30rpx;
+	line-height: 60rpx;
+}
+.result{
+	margin-top: 60px;
+}
+

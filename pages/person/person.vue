@@ -9,7 +9,7 @@
     </view>
     <view class="person-list">
       <cmd-cell-item title="我的预约" slot-left arrow>
-        <cmd-icon type="bullet-list" size="24" color="#368dff"></cmd-icon>
+        <cmd-icon type="bullet-list" size="24" @click="bbb" color="#368dff"></cmd-icon>
       </cmd-cell-item>
       <cmd-cell-item title="消息通知" slot-left arrow @click="aaaa">
         <cmd-icon type="message" size="24" color="#368dff"></cmd-icon>
@@ -64,6 +64,11 @@
           url: '/pages/user/info/info'
         })
       },
+	  bbb(){
+		  uni.navigateTo({
+		    url: '/pages/w-picker-demo/w-picker-demo'
+		  })
+	  },
 	  aaaa(){
 		  var that = this
 		  uni.request({

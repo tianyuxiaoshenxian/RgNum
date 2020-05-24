@@ -556,14 +556,16 @@ const initPicker={
 			for(let d=1;d<=totalDays;d++){
 				tdays.push(forMatNum(d));
 			};
+			tmonths.splice(0,tmonths.splice(0,tmonths.indexOf(value[5])))
 			defaultVal=[
 				fyears.indexOf(value[0])==-1?0:fyears.indexOf(value[0]),
 				fmonths.indexOf(value[1])==-1?0:fmonths.indexOf(value[1]),
-				fdays.indexOf(value[2])==-1?0:fdays.indexOf(value[2]),
+				// fdays.indexOf(value[2])==-1?0:fdays.indexOf(value[2]),
 				tyears.indexOf(value[4])==-1?0:tyears.indexOf(value[4]),
 				tmonths.indexOf(value[5])==-1?0:tmonths.indexOf(value[5]),
-				tdays.indexOf(value[6])==-1?0:tdays.indexOf(value[6])
+				// tdays.indexOf(value[6])==-1?0:tdays.indexOf(value[6])
 			];
+			
 			return {
 				fyears,
 				fmonths,
