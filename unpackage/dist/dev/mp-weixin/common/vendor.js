@@ -1560,10 +1560,10 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 106:
-/*!************************************************************!*\
-  !*** D:/小程序/RgNum/components/xiujun-time-selector/date.js ***!
-  \************************************************************/
+/***/ 119:
+/*!****************************************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/components/xiujun-time-selector/date.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1769,9 +1769,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 15:
-/*!******************************************!*\
-  !*** D:/小程序/RgNum/static/js/BASE_URL.js ***!
-  \******************************************/
+/*!**********************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/static/js/BASE_URL.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1785,9 +1785,9 @@ BASE_URL;exports.default = _default;
 /***/ }),
 
 /***/ 16:
-/*!*********************************************!*\
-  !*** D:/小程序/RgNum/static/js/VglobalData.js ***!
-  \*********************************************/
+/*!*************************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/static/js/VglobalData.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7830,18 +7830,49 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 23:
+/***/ 29:
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 24);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 30);
 
 /***/ }),
 
-/***/ 24:
+/***/ 3:
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 30:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -7872,7 +7903,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 25);
+module.exports = __webpack_require__(/*! ./runtime */ 31);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -7889,7 +7920,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 25:
+/***/ 31:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -8621,41 +8652,10 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 3:
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
 /***/ 4:
-/*!*******************************!*\
-  !*** D:/小程序/RgNum/pages.json ***!
-  \*******************************/
+/*!***********************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/pages.json ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9562,21 +9562,21 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ }),
 
 /***/ 7:
-/*!************************************************!*\
-  !*** D:/小程序/RgNum/pages.json?{"type":"style"} ***!
-  \************************************************/
+/*!****************************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/pages.json?{"type":"style"} ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/home/home": { "navigationBarTitleText": "排队列表" }, "pages/person/person": { "navigationBarTitleText": "个人中心" }, "pages/login/login": {}, "pages/user/info/info": {}, "pages/login/forget": {}, "pages/w-picker-demo/w-picker-demo": {}, "pages/login/register": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "得春堂预约系统", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/yuyue/index": {}, "pages/home/home": { "navigationBarTitleText": "排队列表" }, "pages/person/person": { "navigationBarTitleText": "个人中心" }, "pages/login/login": {}, "pages/user/info/info": {}, "pages/login/forget": {}, "pages/w-picker-demo/w-picker-demo": {}, "pages/login/register": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "得春堂预约系统", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 
 /***/ 8:
-/*!***********************************************!*\
-  !*** D:/小程序/RgNum/pages.json?{"type":"stat"} ***!
-  \***********************************************/
+/*!***************************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/pages.json?{"type":"stat"} ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9585,10 +9585,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 81:
-/*!**************************************************************!*\
-  !*** D:/小程序/RgNum/components/w-picker/city-data/province.js ***!
-  \**************************************************************/
+/***/ 94:
+/*!******************************************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/components/w-picker/city-data/province.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9735,10 +9735,10 @@ provinceData;exports.default = _default;
 
 /***/ }),
 
-/***/ 82:
-/*!**********************************************************!*\
-  !*** D:/小程序/RgNum/components/w-picker/city-data/city.js ***!
-  \**********************************************************/
+/***/ 95:
+/*!**************************************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/components/w-picker/city-data/city.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11249,10 +11249,10 @@ cityData;exports.default = _default;
 
 /***/ }),
 
-/***/ 83:
-/*!**********************************************************!*\
-  !*** D:/小程序/RgNum/components/w-picker/city-data/area.js ***!
-  \**********************************************************/
+/***/ 96:
+/*!**************************************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/components/w-picker/city-data/area.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23802,10 +23802,10 @@ areaData;exports.default = _default;
 
 /***/ }),
 
-/***/ 84:
-/*!****************************************************!*\
-  !*** D:/小程序/RgNum/components/w-picker/w-picker.js ***!
-  \****************************************************/
+/***/ 97:
+/*!********************************************************************!*\
+  !*** E:/QLDownload/极简登录注册模板/RgNum/components/w-picker/w-picker.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

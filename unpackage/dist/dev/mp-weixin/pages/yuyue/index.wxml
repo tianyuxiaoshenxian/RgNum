@@ -1,0 +1,1 @@
+<view><dark-calendar vue-id="2464d15f-1" signeddates="{{[1]}}" data-event-opts="{{[['^onClick',[['onClickDate']]]]}}" bind:onClick="__e" bind:__l="__l"></dark-calendar><input type="text" data-event-opts="{{[['input',[['__set_model',['','dateChecked','$event',[]]]]]]}}" value="{{dateChecked}}" bindinput="__e"/></view>

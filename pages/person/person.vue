@@ -71,12 +71,14 @@
 	  },
 	  aaaa(){
 		  var that = this
+		  var token =uni.getStorageSync('token')
 		  uni.request({
 		  	url:'http://' + this.BASE_URL + '/registerNumber/setRegisterNum',
 		  	data: 
 		  		that.VglobalData.userInfo
 		  	,
-		  	method: 'post',
+		  	method: 'post',header:{accessToken:
+							token},
 		  	success(res) {
 		  		let $data = res.data
 		  		if( $data.message == 'ok'){

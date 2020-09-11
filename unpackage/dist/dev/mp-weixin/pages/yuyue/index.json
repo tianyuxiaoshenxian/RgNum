@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "dark-calendar": "/components/dark-calendar/dark-calendar"
+  }
+}

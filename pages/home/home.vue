@@ -5,13 +5,12 @@
 		</view>
 		<view v-if="!hasLogin" class="hello">
 			<view class="title ul">
-				您好 : {{ userName ? userName : ''}}
+				您好
 			</view>
 			<view class="ul">
 				<view>今日已预约 : {{RegNum}} 人</view>
 			</view>
 			
-			<input v-model="currentTime" @click="clickWpicker" disabled placeholder="请选择预约时间" class="ul">
 			
 			<!-- <view class="ul">
 				现在是 : {{currentTime}}
@@ -43,9 +42,7 @@
 				
 				
 			</view>
-			<view class="ul" v-else>
-				<view>您的号码是 : {{newMyRegNum}} 号</view>
-			</view>
+		
 			
 		</view>
 		<view v-if="hasLogin" class="hello">
@@ -53,8 +50,24 @@
 			<view class="ul">
 				<view>今日已预约 : {{RegNum}} 人</view>
 			</view>
-			<view class="ul">当前为 : {{2}}&nbsp;号就诊</view>
-
+			<view class="ul">
+				<view>您的号码是 : {{newMyRegNum}} 号</view>
+			</view>
+			<!-- <template v-if="currentTime"> -->
+				<view class="ul">
+					<input type="text" v-model="currentTime" placeholder="请选择预约时间"/>
+				</view>
+				
+			<!-- </template> -->
+			<template v-if="!currentTime">
+				<view class="ul"><wButton
+						text="我的预约"
+						:rotate="isRotate" 
+						@click.native="startLogin()"
+						class="wbutton"
+					></wButton></view>
+				
+			</template>
 			<view class="ul">
 				<wButton
 					text="立即预约"
@@ -223,7 +236,9 @@
 				// 	async success() {
 				// 		console.log("消息发送成功");
 				// 	},
+				debugger
 				// });\
+				var token =uni.getStorageSync('token')
 				var that =this 
 				if(!this.VglobalData.isLogin){
 					uni.reLaunch({
@@ -232,6 +247,10 @@
 				} 
 				else {
 					if( !this.currentTime ){
+						debugger
+						uni.redirectTo({
+							url:'../yuyue/index'
+						})
 						this.$message('请选择预约时间')
 						return
 					} else {
@@ -240,7 +259,7 @@
 							data: 
 								that.userInfo
 							,
-							method: 'post',
+							method: 'post',header:{accessToken:token},
 							success(res) {
 								let $data = res.data
 								if( $data.message == 'ok'){
@@ -292,7 +311,7 @@
 				method: 'post',
 				success(res) {
 					if( res.data.message == 'ok'){
-				 	that.RegNum = res.data.data.RegNum
+				 	that.RegNum = res.data.data.RegNum ? res.data.data.RegNum : 0
 					that.startYear = res.data.data.currentTime.substring(0,4)
 					} else {
 						that.$message(res.data.resultMsg)

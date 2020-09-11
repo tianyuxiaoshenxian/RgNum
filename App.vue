@@ -7,6 +7,9 @@
 			plus.navigator.closeSplashscreen(); 
 			// #endif 
 		},
+		globalData:{
+			token:''
+		},
 		onLaunch: function() {
 			
 			console.log('App Launch')

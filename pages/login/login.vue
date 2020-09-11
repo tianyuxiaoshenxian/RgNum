@@ -37,7 +37,9 @@
 					<view class="cuIcon-phone" @tap="login_phone"></view>
 				</view> -->
 			</view>
-			
+			<uni-popup ref="loading" :maskClick='false' type="center">
+				正在跳转...
+			</uni-popup>
 			<uni-popup ref="denyAuthorizatioPopup" :maskClick='false' type="center">
 				<button open-type="getUserInfo" @getuserinfo="GetUserInfo" type="primary" class="primary" >微信授权登录</button>
 			</uni-popup>
@@ -95,7 +97,8 @@
 					console.log(res)
 					if (res.code) {
 						wx.request({
-							url: 'http://"+this.BASE_URL+"/wechat/getopenid',
+							url: 'http://'+this.BASE_URL+'/wechat/getopenid',
+							
 							data: {
 								appId: 'wxc49223acb47280b7',
 								//小程序的 app secret
@@ -135,12 +138,21 @@
 				// 	// error
 				// }
 			},
-			getLogin(){
+			isRegister(){
+				uni.navigateTo({
+					url:"/pages/login/register?name="+this.userInfo.userName+'&phone='+this.userInfo.phone
+				})
+			},
+			closePopup(){
+				this.$refs.yijianlogin.close()
+			},
+		 	getLogin(){
 				var that = this
 				this.VglobalData.userName =this.userInfo.userName
 				this.VglobalData.phone =this.userInfo.phone
-				uni.request({
+				 uni.request({
 					url:'http://' + this.BASE_URL + '/user/login',
+					// url: 'http://localhost:3000/login',
 					data:that.userInfo,
 					method:'POST',
 					success(res) {
@@ -148,6 +160,8 @@
 							that.isRotate=false
 							that.VglobalData.userInfo = res.data.data.result
 							that.VglobalData.isLogin = true
+							debugger
+							uni.setStorageSync('token', res.data.data.token);
 							setTimeout(()=>{
 								if(res.data.resultMsg =='登录成功'){
 									uni.reLaunch({
@@ -158,6 +172,12 @@
 						} else {
 							that.isRotate=false
 							that.$message(res.data.resultMsg)
+							setTimeout(()=>{
+								that.$refs.loading.open()
+							},2000)
+							setTimeout(()=>{
+								that.isRegister()
+							},3000)
 						}
 					},
 					fail(err) {
@@ -216,7 +236,7 @@
 					uni.showToast({
 						icon: 'none',
 						position: 'bottom',
-						title: '手机号输入不正确'
+						title: '手机号格式输入不正确'
 					});
 					return false;
 				}  
@@ -278,6 +298,18 @@
 			login_weixin() {
 				//微信登录
 				this.$message("小程序需要微信授权登录")
+				uni.authorize({
+				    scope: 'scope.userInfo',
+				    success() {
+				        uni.userInfo({
+							  provider: 'weixin',
+							      success: function (infoRes) {
+							        console.log('用户昵称为：' + infoRes.userInfo.nickName);
+							      }
+							    })
+							  }
+						
+				})
 				this.$refs.denyAuthorizatioPopup.open()
 			},
 			login_weibo() {

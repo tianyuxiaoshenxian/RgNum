@@ -36,7 +36,7 @@ Vue.prototype.$message = function(message){
 	return uni.showToast({
 		title:message,
 		icon:'none',
-		duration:2000
+		duration:1500
 	})
 }
 Vue.prototype.$socketTask = function(){

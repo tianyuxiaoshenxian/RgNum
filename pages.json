@@ -1,6 +1,8 @@
 {
     "pages": [ //pages数组中第一项表示应用启动页,
         {
+        	"path": "pages/yuyue/index"
+        },{
             "path": "pages/home/home",
             "style": {"navigationBarTitleText": "排队列表"}
         },{
