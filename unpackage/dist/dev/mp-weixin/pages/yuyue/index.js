@@ -103,7 +103,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  "nx-time-picker": function() {
+    return __webpack_require__.e(/*! import() | components/nx-time-picker/nx-time-picker */ "components/nx-time-picker/nx-time-picker").then(__webpack_require__.bind(null, /*! @/components/nx-time-picker/nx-time-picker.vue */ 193))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -139,7 +143,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var darkCalendar = function darkCalendar() {__webpack_require__.e(/*! require.ensure | components/dark-calendar/dark-calendar */ "components/dark-calendar/dark-calendar").then((function () {return resolve(__webpack_require__(/*! ../../components/dark-calendar/dark-calendar.vue */ 82));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var nxTimePicker = function nxTimePicker() {__webpack_require__.e(/*! require.ensure | components/nx-time-picker/nx-time-picker */ "components/nx-time-picker/nx-time-picker").then((function () {return resolve(__webpack_require__(/*! @/components/nx-time-picker/nx-time-picker.vue */ 193));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var darkCalendar = function darkCalendar() {__webpack_require__.e(/*! require.ensure | components/dark-calendar/dark-calendar */ "components/dark-calendar/dark-calendar").then((function () {return resolve(__webpack_require__(/*! ../../components/dark-calendar/dark-calendar.vue */ 82));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
 
 
 
@@ -153,16 +159,66 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 {
   components: {
-    darkCalendar: darkCalendar },
+    darkCalendar: darkCalendar,
+    nxTimePicker: nxTimePicker },
+
 
   data: function data() {
     return {
-      dateChecked: '' };
+      dateChecked: '',
+      date: [
+      {
+        id: 1,
+        startTime: "8:00",
+        isCan: 0 },
+
+      {
+        id: 2,
+        startTime: "8:30",
+        isCan: 0 },
+
+
+
+      {
+        id: 1,
+        startTime: "9:00",
+        isCan: 0 },
+
+      {
+        id: 2,
+        startTime: "9:30",
+        isCan: 0 },
+
+
+
+      {
+        id: 1,
+        startTime: "10:00",
+        isCan: 0 },
+
+      {
+        id: 2,
+        startTime: "10:30",
+        isCan: 0 }] };
+
+
 
   },
   methods: {
     onClickDate: function onClickDate(date) {
       this.dateChecked = date;
+    },
+    showClose: function showClose() {
+      console.log("点击了取消");
+    },
+    showTime: function showTime(obj) {
+      console.log("点击了确定");
+      console.log(obj);
+    },
+    checkDate: function checkDate(date) {
+      console.log("选择了日期");
+      console.log(date);
+      this.date = this.date1;
     } } };exports.default = _default;
 
 /***/ })

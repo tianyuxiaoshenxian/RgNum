@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "nx-time-picker": "/components/nx-time-picker/nx-time-picker",
     "dark-calendar": "/components/dark-calendar/dark-calendar"
   }
 }

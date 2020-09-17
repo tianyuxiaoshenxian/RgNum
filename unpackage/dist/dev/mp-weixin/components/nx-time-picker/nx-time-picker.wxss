@@ -1,0 +1,204 @@
+
+.dateSelection{
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: flex;
+		/* width: 100%; */
+		/* flex-wrap: wrap; */
+		margin: 0 auto;
+		height: 650rpx;
+}
+.weekSelection{
+	  width: 100vw;
+      height: 150rpx;
+	  overflow:hidden;
+	  white-space:nowrap;
+	  padding-top: 20rpx;
+	  background-color: #dadada;
+		/* flex-direction: column; */
+		/* flex-wrap: wrap; */
+}
+.weekSelectionBox{
+		display: -webkit-inline-box;
+		display: -webkit-inline-flex;
+		display: inline-flex;
+		border-radius: 10rpx;
+		border: #007AFF solid 2rpx;
+		width: 130rpx;
+		margin: 20rpx;
+		height: 100rpx;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-webkit-flex-direction: column;
+		        flex-direction: column;
+		background-color: #FFFFFF;
+}
+.weekSelectionBoxOn{
+		display: -webkit-inline-box;
+		display: -webkit-inline-flex;
+		display: inline-flex;
+		border-radius: 10rpx;
+		border: #007AFF solid 2rpx;
+		width: 130rpx;
+		margin: 20rpx;
+		height: 100rpx;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-webkit-flex-direction: column;
+		        flex-direction: column;
+		background-color: #4B93FF;
+		color: #FFFFFF;
+}
+.dateSelectionBox{
+		display: -webkit-inline-box;
+		display: -webkit-inline-flex;
+		display: inline-flex;
+		border-radius: 10rpx;
+		border: #007AFF solid 2rpx;
+		width: 20%;
+		margin: 15rpx;
+		height: 100rpx;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+		background-color: #FFFFFF;
+}
+.dateSelectionBoxOn{
+		display: -webkit-inline-box;
+		display: -webkit-inline-flex;
+		display: inline-flex;
+		border-radius: 10rpx;
+		border: #007AFF solid 2rpx;
+		background-color: #007AFF;
+		color: #FFFFFF;
+		width: 20%;
+		margin: 15rpx;
+		height: 100rpx;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+}
+.dateSelectionBoxOff{
+		display: -webkit-inline-box;
+		display: -webkit-inline-flex;
+		display: inline-flex;
+		border-radius: 10rpx;
+		border: #dedede solid 2rpx;
+		width: 20%;
+		margin: 15rpx;
+		height: 100rpx;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+		color: #ebebeb;
+		background-color: #dedede;
+}
+.dateSelectionBoxYou{
+		display: -webkit-inline-box;
+		display: -webkit-inline-flex;
+		display: inline-flex;
+		border-radius: 10rpx;
+		border: #dedede solid 2rpx;
+		width: 20%;
+		margin: 15rpx;
+		height: 100rpx;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+		color: #FFFFFF;
+		background-color: #83DC42;
+}
+.dateSelectionBoxThem{
+		display: -webkit-inline-box;
+		display: -webkit-inline-flex;
+		display: inline-flex;
+		border-radius: 10rpx;
+		border: #dedede solid 2rpx;
+		width: 20%;
+		margin: 15rpx;
+		height: 100rpx;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+		color: #FFFFFF;
+		background-color:#4CD964;
+}
+.btn{
+		margin-top: 50rpx;
+		width: 100%;
+		height: 100rpx;
+		bottom: 0;
+		position: absolute;
+}
+.btnqx{
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		        flex: 1;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+		background-color: #FFFFFF;
+}
+.btnqd{
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		        flex: 1;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+		background-color: #2979FF;
+		color: #FFFFFF;
+}
+.checkbtn{
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: flex;
+		width: 100%;
+}
+.check{
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		        flex: 1;
+		height: 50rpx;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+		margin: 10rpx;
+}
+
