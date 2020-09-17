@@ -68,6 +68,14 @@
 			    },
 			    showTime(obj){
 			        console.log("点击了确定")
+					
+					uniCloud.callFunction({
+						name:'db_test',
+						data:{
+							aaa:1123,
+							bbb:222
+						}
+					})
 			        console.log(obj)
 			    },
 			    checkDate(date){

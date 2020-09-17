@@ -12,7 +12,6 @@
           align-items: center;
   height: 150px;
   padding-left: 20px;
-  background: -webkit-gradient(linear, left top, right top, from(#365fff), to(#36bbff));
   background: -webkit-linear-gradient(left, #365fff, #36bbff);
   background: linear-gradient(to right, #365fff, #36bbff);
 }

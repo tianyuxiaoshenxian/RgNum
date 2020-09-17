@@ -236,8 +236,7 @@
 }
 /*沉浸状态栏变化*/
 .status-bar {
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	display: block;
 	width: 100%;
 	margin-bottom: -3rpx;
@@ -257,8 +256,7 @@
 	line-height: 92rpx;
 	color: #000;
 	background: transparent;
-	-webkit-box-shadow: 0 6rpx 6rpx -3rpx rgba(0, 0, 0, .2);
-	        box-shadow: 0 6rpx 6rpx -3rpx rgba(0, 0, 0, .2);
+	box-shadow: 0 6rpx 6rpx -3rpx rgba(0, 0, 0, .2);
 }
 /*所有都垂直占比*/
 .cmd-nav-bar-left,

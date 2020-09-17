@@ -1,13 +1,13 @@
 {
   "pages": [
-    "pages/yuyue/index",
     "pages/home/home",
     "pages/person/person",
     "pages/login/login",
     "pages/user/info/info",
     "pages/login/forget",
     "pages/w-picker-demo/w-picker-demo",
-    "pages/login/register"
+    "pages/login/register",
+    "pages/yuyue/index"
   ],
   "subPackages": [],
   "window": {
@@ -35,6 +35,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap85.json"
+  "usingComponents": {}
 }

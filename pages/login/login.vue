@@ -96,27 +96,28 @@
 				success: function(res) {
 					console.log(res)
 					if (res.code) {
-						wx.request({
-							url: 'http://'+this.BASE_URL+'/wechat/getopenid',
+						
+						// wx.request({
+						// 	url: 'http://'+this.BASE_URL+'/wechat/getopenid',
 							
-							data: {
-								appId: 'wxc49223acb47280b7',
-								//小程序的 app secret
-								secret: 'c988394c1d476afca8945cacae38a375',
-								grantType: 'authorization_code',
-								jsCode: res.code
-							},
-							method: 'post',
-							success: function(openIdRes) {
-								if (openIdRes.data.openid != null & openIdRes.data.openid != undefined) {
-									console.log(openIdRes)
-									that.openIdRes = openIdRes.data.openid
-								}
-							},
-							fail: function(error) {
-								console.log(error)
-							}
-						})
+						// 	data: {
+						// 		appId: 'wxc49223acb47280b7',
+						// 		//小程序的 app secret
+						// 		secret: 'c988394c1d476afca8945cacae38a375',
+						// 		grantType: 'authorization_code',
+						// 		jsCode: res.code
+						// 	},
+						// 	method: 'post',
+						// 	success: function(openIdRes) {
+						// 		if (openIdRes.data.openid != null & openIdRes.data.openid != undefined) {
+						// 			console.log(openIdRes)
+						// 			that.openIdRes = openIdRes.data.openid
+						// 		}
+						// 	},
+						// 	fail: function(error) {
+						// 		console.log(error)
+						// 	}
+						// })
 					}
 				}
 			})
@@ -150,41 +151,50 @@
 				var that = this
 				this.VglobalData.userName =this.userInfo.userName
 				this.VglobalData.phone =this.userInfo.phone
-				 uni.request({
-					url:'http://' + this.BASE_URL + '/user/login',
-					// url: 'http://localhost:3000/login',
-					data:that.userInfo,
-					method:'POST',
-					success(res) {
-						if(res.data.message == 'ok'){
-							that.isRotate=false
-							that.VglobalData.userInfo = res.data.data.result
-							that.VglobalData.isLogin = true
-							debugger
-							uni.setStorageSync('token', res.data.data.token);
-							setTimeout(()=>{
-								if(res.data.resultMsg =='登录成功'){
-									uni.reLaunch({
-										url:'/pages/home/home'
-									})
-								}
-							},1000)
-						} else {
-							that.isRotate=false
-							that.$message(res.data.resultMsg)
-							setTimeout(()=>{
-								that.$refs.loading.open()
-							},2000)
-							setTimeout(()=>{
-								that.isRegister()
-							},3000)
-						}
-					},
-					fail(err) {
-						that.isRotate=false
-						that.$message(res.data.resultMsg)
+				uniCloud.callFunction({
+					name:'login',
+					data:that.userInfo
+				}).then(res => {
+					if(res.code ==200){
+						
 					}
-				})
+					
+				});
+				//  uni.request({
+				// 	url:'http://' + this.BASE_URL + '/user/login',
+				// 	// url: 'http://localhost:3000/login',
+				// 	data:that.userInfo,
+				// 	method:'POST',
+				// 	success(res) {
+				// 		if(res.data.message == 'ok'){
+				// 			that.isRotate=false
+				// 			that.VglobalData.userInfo = res.data.data.result
+				// 			that.VglobalData.isLogin = true
+				// 			debugger
+				// 			uni.setStorageSync('token', res.data.data.token);
+				// 			setTimeout(()=>{
+				// 				if(res.data.resultMsg =='登录成功'){
+				// 					uni.reLaunch({
+				// 						url:'/pages/home/home'
+				// 					})
+				// 				}
+				// 			},1000)
+				// 		} else {
+				// 			that.isRotate=false
+				// 			that.$message(res.data.resultMsg)
+				// 			setTimeout(()=>{
+				// 				that.$refs.loading.open()
+				// 			},2000)
+				// 			setTimeout(()=>{
+				// 				that.isRegister()
+				// 			},3000)
+				// 		}
+				// 	},
+				// 	fail(err) {
+				// 		that.isRotate=false
+				// 		that.$message(res.data.resultMsg)
+				// 	}
+				// })
 				
 			},
 			GetUserInfo(e) {

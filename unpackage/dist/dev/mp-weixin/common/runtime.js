@@ -12,7 +12,7 @@
 /******/ 		var moduleId, chunkId, i = 0, resolves = [];
 /******/ 		for(;i < chunkIds.length; i++) {
 /******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId]) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 				resolves.push(installedChunks[chunkId][0]);
 /******/ 			}
 /******/ 			installedChunks[chunkId] = 0;
@@ -48,6 +48,7 @@
 /******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
 /******/ 			}
 /******/ 		}
+/******/
 /******/ 		return result;
 /******/ 	}
 /******/
@@ -104,11 +105,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/dark-calendar/dark-calendar":1,"components/nx-time-picker/nx-time-picker":1,"components/w-picker/w-picker":1,"components/xiujun-time-selector/index":1,"components/watch-login/watch-button":1,"pages/home/popupData/popupData":1,"components/cmd-avatar/cmd-avatar":1,"components/cmd-cell-item/cmd-cell-item":1,"components/cmd-icon/cmd-icon":1,"components/uni-popup/uni-popup":1,"components/watch-login/watch-input":1,"components/cmd-nav-bar/cmd-nav-bar":1,"components/cmd-page-body/cmd-page-body":1,"components/cmd-transition/cmd-transition":1,"components/uni-transition/uni-transition":1};
+/******/ 		var cssChunks = {"components/w-picker/w-picker":1,"components/xiujun-time-selector/index":1,"components/watch-login/watch-button":1,"pages/home/popupData/popupData":1,"components/cmd-avatar/cmd-avatar":1,"components/cmd-cell-item/cmd-cell-item":1,"components/cmd-icon/cmd-icon":1,"components/uni-popup/uni-popup":1,"components/watch-login/watch-input":1,"components/cmd-nav-bar/cmd-nav-bar":1,"components/cmd-page-body/cmd-page-body":1,"components/cmd-transition/cmd-transition":1,"components/dark-calendar/dark-calendar":1,"components/nx-time-picker/nx-time-picker":1,"components/uni-transition/uni-transition":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/dark-calendar/dark-calendar":"components/dark-calendar/dark-calendar","components/nx-time-picker/nx-time-picker":"components/nx-time-picker/nx-time-picker","components/w-picker/w-picker":"components/w-picker/w-picker","components/xiujun-time-selector/index":"components/xiujun-time-selector/index","components/watch-login/watch-button":"components/watch-login/watch-button","pages/home/popupData/popupData":"pages/home/popupData/popupData","components/cmd-avatar/cmd-avatar":"components/cmd-avatar/cmd-avatar","components/cmd-cell-item/cmd-cell-item":"components/cmd-cell-item/cmd-cell-item","components/cmd-icon/cmd-icon":"components/cmd-icon/cmd-icon","components/uni-popup/uni-popup":"components/uni-popup/uni-popup","components/watch-login/watch-input":"components/watch-login/watch-input","components/cmd-nav-bar/cmd-nav-bar":"components/cmd-nav-bar/cmd-nav-bar","components/cmd-page-body/cmd-page-body":"components/cmd-page-body/cmd-page-body","components/cmd-transition/cmd-transition":"components/cmd-transition/cmd-transition","components/uni-transition/uni-transition":"components/uni-transition/uni-transition"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/w-picker/w-picker":"components/w-picker/w-picker","components/xiujun-time-selector/index":"components/xiujun-time-selector/index","components/watch-login/watch-button":"components/watch-login/watch-button","pages/home/popupData/popupData":"pages/home/popupData/popupData","components/cmd-avatar/cmd-avatar":"components/cmd-avatar/cmd-avatar","components/cmd-cell-item/cmd-cell-item":"components/cmd-cell-item/cmd-cell-item","components/cmd-icon/cmd-icon":"components/cmd-icon/cmd-icon","components/uni-popup/uni-popup":"components/uni-popup/uni-popup","components/watch-login/watch-input":"components/watch-login/watch-input","components/cmd-nav-bar/cmd-nav-bar":"components/cmd-nav-bar/cmd-nav-bar","components/cmd-page-body/cmd-page-body":"components/cmd-page-body/cmd-page-body","components/cmd-transition/cmd-transition":"components/cmd-transition/cmd-transition","components/dark-calendar/dark-calendar":"components/dark-calendar/dark-calendar","components/nx-time-picker/nx-time-picker":"components/nx-time-picker/nx-time-picker","components/uni-transition/uni-transition":"components/uni-transition/uni-transition"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {
@@ -170,6 +171,8 @@
 /******/ 				}
 /******/ 				script.src = jsonpScriptSrc(chunkId);
 /******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
 /******/ 				onScriptComplete = function (event) {
 /******/ 					// avoid mem leaks in IE.
 /******/ 					script.onerror = script.onload = null;
@@ -179,7 +182,8 @@
 /******/ 						if(chunk) {
 /******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
 /******/ 							var realSrc = event && event.target && event.target.src;
-/******/ 							var error = new Error('Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')');
+/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 							error.name = 'ChunkLoadError';
 /******/ 							error.type = errorType;
 /******/ 							error.request = realSrc;
 /******/ 							chunk[1](error);

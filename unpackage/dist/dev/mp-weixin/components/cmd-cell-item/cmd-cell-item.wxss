@@ -21,8 +21,7 @@
 	padding-bottom: 20rpx;
 	margin-left: 20rpx;
 	margin-right: 20rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 .cmd-cell-item-body::before {
 	content: '';
